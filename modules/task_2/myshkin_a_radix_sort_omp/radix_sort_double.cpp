@@ -1,12 +1,12 @@
 // Copyright 2020 Myshkin Andrey
-#include "../../../modules/task_2/myshkin_a_radix_sort_omp/radix_sort_double.h" 
 #include <omp.h>
+#include <stdio.h>
+#include <cstring>
 #include <ctime>
 #include <random>
 #include <stdlib.h>
-#include <stdio.h>
-#include <cstring>
 #include <utility>
+#include "../../../modules/task_2/myshkin_a_radix_sort_omp/radix_sort_double.h" 
 
 int getRandomArray(double* buffer, int length, double rangebot, double rangetop) {
     if ((length <= 0) || (buffer == nullptr)) return -1;
@@ -184,7 +184,6 @@ int MergeArrayForOmp(double* buffer1, int length1, double* buffer2, int length2)
 int RadixSortOmp(double* buffer, int length, int num_threads) {
     if (length < 1) return -1;
     if (buffer == nullptr) return -1;
-
     omp_set_num_threads(num_threads);
     double* posArray = nullptr;
     double* negArray = nullptr;
@@ -194,8 +193,7 @@ int RadixSortOmp(double* buffer, int length, int num_threads) {
     int sts = 0;
     int flag = 0;
 
-    int sizeThr;
-    int res;
+    int res, sizeThr;
     if (num_threads > length) num_threads = 4;
 
     bufferCpy = reinterpret_cast<double*>(malloc(sizeof(double) * length));

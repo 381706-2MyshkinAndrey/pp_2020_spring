@@ -1,10 +1,9 @@
 // Copyright 2020 Myshkin Andrey
-#include "../../../modules/task_2/myshkin_a_radix_sort_omp/radix_sort_double.h"
 #include <numeric>
 #include <utility>
 #include <algorithm>
 #include <gtest/gtest.h>
-
+#include "../../../modules/task_2/myshkin_a_radix_sort_omp/radix_sort_double.h"
 
 TEST(Senquential, Test_Numder_First) {
     const int length = 10;
@@ -12,7 +11,7 @@ TEST(Senquential, Test_Numder_First) {
     int sts2 = 0;
     double *buffer = nullptr;
     double *buffer2 = nullptr;
-    int num_threads = 2;
+    int num_threads = 4;
 
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
@@ -42,18 +41,17 @@ TEST(Senquential, Test_Numder_First) {
 }
 
 TEST(Senquential, Test_Numder_Second) {
-    const int length = 42;
+    const int length = 43;
     int sts = 0;
     int sts2 = 0;
     double *buffer = nullptr;
     double *buffer2 = nullptr;
-    int num_threads = 2;
+    int num_threads = 43;
 
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
         buffer2 = reinterpret_cast<double*>(malloc(sizeof(double) * length));
-    }
-    else {
+    } else {
         sts = -1;
         ASSERT_EQ(sts, 0);
     }
@@ -88,8 +86,7 @@ TEST(Senquential, Test_Numder_Third) {
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
         buffer2 = reinterpret_cast<double*>(malloc(sizeof(double) * length));
-    }
-    else {
+    } else {
         sts = -1;
         ASSERT_EQ(sts, 0);
     }
@@ -124,8 +121,7 @@ TEST(Senquential, Test_Numder_Fourth) {
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
         buffer2 = reinterpret_cast<double*>(malloc(sizeof(double) * length));
-    }
-    else {
+    } else {
         sts = -1;
         ASSERT_EQ(sts, 0);
     }
@@ -160,8 +156,7 @@ TEST(Senquential, Test_Numder_Fifth) {
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
         buffer2 = reinterpret_cast<double*>(malloc(sizeof(double) * length));
-    }
-    else {
+    } else {
         sts = -1;
         ASSERT_EQ(sts, 0);
     }
