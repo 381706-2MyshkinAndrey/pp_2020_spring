@@ -4,9 +4,8 @@
 #include <cstring>
 #include <ctime>
 #include <random>
-#include <stdlib.h>
 #include <utility>
-#include "../../../modules/task_2/myshkin_a_radix_sort_omp/radix_sort_double.h" 
+#include "../../../modules/task_2/myshkin_a_radix_sort_omp/radix_sort_double.h"
 
 int getRandomArray(double* buffer, int length, double rangebot, double rangetop) {
     if ((length <= 0) || (buffer == nullptr)) return -1;
@@ -192,13 +191,12 @@ int RadixSortOmp(double* buffer, int length, int num_threads) {
     int poslen = 0, neglen = 0;
     int sts = 0;
     int flag = 0;
-
     int res, sizeThr;
     if (num_threads > length) num_threads = 4;
 
     bufferCpy = reinterpret_cast<double*>(malloc(sizeof(double) * length));
 
-#pragma omp parallel shared(buffer, bufferCpy, flag) private(posArray, negArray, tmpArr, res, sizeThr, poslen, neglen)
+#pragma omp parallel shared(buffer, bufferCpy, flag) private(posArray, negArray, poslen, neglen, tmpArr, res, sizeThr)
     {
         int tid = omp_get_thread_num();
         poslen = 0, neglen = 0;

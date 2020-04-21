@@ -1,8 +1,8 @@
 // Copyright 2020 Myshkin Andrey
+#include <gtest/gtest.h>
 #include <numeric>
 #include <utility>
 #include <algorithm>
-#include <gtest/gtest.h>
 #include "../../../modules/task_2/myshkin_a_radix_sort_omp/radix_sort_double.h"
 
 TEST(Senquential, Test_Numder_First) {
@@ -11,7 +11,7 @@ TEST(Senquential, Test_Numder_First) {
     int sts2 = 0;
     double *buffer = nullptr;
     double *buffer2 = nullptr;
-    int num_threads = 4;
+    int num_threads = 5;
 
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
@@ -116,7 +116,7 @@ TEST(Senquential, Test_Numder_Fourth) {
     int sts2 = 0;
     double *buffer = nullptr;
     double *buffer2 = nullptr;
-    int num_threads = 2;
+    int num_threads = 4;
 
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
@@ -146,12 +146,12 @@ TEST(Senquential, Test_Numder_Fourth) {
 }
 
 TEST(Senquential, Test_Numder_Fifth) {
-    const int length = 100;
+    const int length = 63;
     int sts = 0;
     int sts2 = 0;
     double *buffer = nullptr;
     double *buffer2 = nullptr;
-    int num_threads = 2;
+    int num_threads = 3;
 
     if (length > 0) {
         buffer = reinterpret_cast<double*>(malloc(sizeof(double) * length));
