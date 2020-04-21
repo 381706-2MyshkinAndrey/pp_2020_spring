@@ -2,9 +2,8 @@
 #include <numeric>
 #include <utility>
 #include <algorithm>
-#include "./ops_omp.h"
-#include <omp.h>
 #include <gtest/gtest.h>
+#include "./ops_omp.h"
 #include "../../../modules/task_1/myshkin_a_radix_sort_double/radix_sort_double.h"
 
 

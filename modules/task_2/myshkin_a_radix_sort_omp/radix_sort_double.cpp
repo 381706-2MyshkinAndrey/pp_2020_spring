@@ -1,11 +1,11 @@
 // Copyright 2020 Myshkin Andrey
+#include <omp.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <cstring>
 #include <utility>
 #include <random>
-#include <omp.h>
-#include <time.h>
-#include <stdlib.h>
+#include <ctime>
 #include "../../../modules/task_2/myshkin_a_radix_sort_omp/ops_omp.h"
 
 int getRandomArray(double* buffer, int length, double rangebot, double rangetop) {
@@ -200,14 +200,14 @@ int RadixSortOmp(double* buffer, int length, int num_threads) {
 
     bufferCpy = reinterpret_cast<double*>(malloc(sizeof(double) * length));
 
-#pragma omp parallel shared(buffer, bufferCpy, flag) private(posArray, negArray, tmpArr, res, sizeThr, poslen, neglen) 
+#pragma omp parallel shared(buffer, bufferCpy, flag) private(posArray, negArray, tmpArr, res, sizeThr, poslen, neglen)
     {
         int tid = omp_get_thread_num();
         poslen = 0, neglen = 0;
         sizeThr = length / num_threads;
         res = length % num_threads;
 
-#pragma omp master 
+#pragma omp master
         sizeThr = sizeThr + res;
 #pragma omp master
         res = 0;
