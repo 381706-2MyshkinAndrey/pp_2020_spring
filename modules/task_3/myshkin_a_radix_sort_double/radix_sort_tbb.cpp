@@ -5,7 +5,7 @@
 #include <tbb/tbb.h>
 #include "tbb/parallel_sort.h"
 
-using namespace tbb;
+// using namespace tbb;
 
 int getRandomArray(double* buffer, int length, double rangebot, double rangetop) {
     if ((length <= 0) || (buffer == nullptr)) return -1;
@@ -42,15 +42,14 @@ int SortingCheck(double *buffer, int length) {
     for (int i = 0; i < length - 1; i++) {
         if (buffer[i] <= buffer[i + 1]) {
             i++;
-        }
-        else {
+        } else {
             return -1;
         }
     }
     return 0;
 }
 
-class Counter : public task {
+class Counter : public tbb::task {
     double* buffer;
     int length;
     int* counter;
@@ -72,7 +71,7 @@ class Counter : public task {
      }
 };
 
-class Deployment : public task {
+class Deployment : public tbb::task {
     double* input;
     double* output;
     int length;
@@ -95,7 +94,7 @@ class Deployment : public task {
      }
 };
 
-class CountingSort : public task {
+class CountingSort : public tbb::task {
     double* buffer;
     double* buf;
     int length;
@@ -164,7 +163,7 @@ class CountingSort : public task {
     }
 };
 
-class RadixSortUnsigned : public task {
+class RadixSortUnsigned : public tbb::task {
     double* buffer;
     double* buf;
     int length;
@@ -206,7 +205,7 @@ int RadixSort(double* buffer, int length, int NumThreads) {
     int poslen = 0, neglen = 0;
     int sts = 0;
 
-    task_scheduler_init init(NumThreads);
+    tbb::task_scheduler_init init(NumThreads);
 
     posArray = reinterpret_cast<double*>(malloc(sizeof(double) * length));
     if (posArray == nullptr) { printf(" Unable to allocate memory for an array(posArray)\n"); return -1; }
@@ -218,15 +217,14 @@ int RadixSort(double* buffer, int length, int NumThreads) {
     for (int i = 0; i < length; i++) {
         if (buffer[i] >= 0) {
             posArray[poslen] = buffer[i]; poslen++;
-        }
-        else { negArray[neglen] = buffer[i]; neglen++; }
+        } else { negArray[neglen] = buffer[i]; neglen++; }
     }
 
-    RadixSortUnsigned& sorter1 = *new (task::allocate_root())
+    RadixSortUnsigned& sorter1 = *new (tbb::task::allocate_root())
         RadixSortUnsigned(posArray, tmp, poslen, NumThreads);
     tbb::task::spawn_root_and_wait(sorter1);
 
-    RadixSortUnsigned& sorter2 = *new (task::allocate_root())
+    RadixSortUnsigned& sorter2 = *new (tbb::task::allocate_root())
         RadixSortUnsigned(negArray, tmp, neglen, NumThreads);
     tbb::task::spawn_root_and_wait(sorter2);
 

@@ -86,7 +86,7 @@ TEST(RadixSortTBB, Test_Fifth) {
 
 TEST(RadixSortTBB, Test_False_With_Length) {
     double buffer[4] = { 2.3, 1.4, 6.4, -9.7 };
-    int length = -3;
+    int length = -35;
     int sts = 0;
 
     sts = RadixSort(buffer, length, 2);
